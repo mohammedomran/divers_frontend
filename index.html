@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Divers hotel | reserve now !!</title>
+  </head>
+  <body>
+    <p id="demo"></p>
+
+    <div id="clockdiv">
+      <div>
+        <span class="minutes"></span>
+        <div class="smalltext">Minutes</div>
+      </div>
+      <div>
+        <span class="seconds"></span>
+        <div class="smalltext">Seconds</div>
+      </div>
+    </div>
+
+    <div class="container m-auto pt-5">
+      <div class="row justify-content-center">
+        <h1 class="text-center">Divers hotel | reservation</h1>
+
+        <!-- step 1 starts here-->
+        <!----------------------->
+        <!----------------------->
+        <!----------------------->
+        <div class="col-12 col-lg-8" id="step1">
+          <span class="text-muted d-block mb-3 text-center">step 1 : checking availability</span>
+
+          <form class="pt-5">            
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Adults number</label>
+                  <input id="adultsNumber" type="number" class="form-control">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Kids number</label>
+                  <input id="kidsNumber" type="number" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-lg-6">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Check-in date</label>
+                  <input id="checkIn" type="date" class="form-control">
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Check-out date</label>
+                  <input id="checkOut" type="date" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Room type</label>
+              <select class="form-control custom-select" id="roomsList">
+                <option selected disabled="">Open this select menu</option>
+              </select>
+            </div>
+
+
+            <div class="row justify-content-between">
+              <div class="col-7 col-lg-4">
+                <div class="form-group">
+                  <button onclick="checkAvailability()" type="button" class="btn btn-primary form-control">Check availability</button>
+                </div>
+              </div>
+              <div class="col-5 col-lg-4">
+                <div class="form-group">
+                  <button id="next" onclick="goToStep2()" type="button" disabled class="btn btn-success form-control">Next</button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <!--------------------->
+        <!--------------------->
+        <!--------------------->
+        <!-- step 1 ends here-->
+
+
+
+        <!-- step 2 starts here-->
+        <!----------------------->
+        <!----------------------->
+        <!----------------------->
+        <div class="col-12 col-lg-8" id="step2">
+          <span class="text-muted d-block mb-3 text-center">step 2 : completing reservation</span>
+
+          <form class="pt-5">            
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Your Name</label>
+                  <input id="name" type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Your email</label>
+                  <input id="email" type="email" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Your country</label>
+                  <input id="country" type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Meal type</label>
+              <select class="form-control custom-select" id="mealsList">
+                <option selected disabled="">Open this select menu</option>
+              </select>
+            </div>
+
+
+            <div class="row justify-content-between">
+              <div class="col-12 col-lg-5">
+                <div class="form-group">
+                  <button onclick="goToStep1()" type="button" class="btn btn-primary form-control">Back</button>
+                </div>
+              </div>
+              <div class="col-12 col-lg-5">
+                <div class="form-group">
+                  <button onclick="showCost()" type="button" class="btn btn-success form-control">Show cost</button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <!--------------------->
+        <!--------------------->
+        <!--------------------->
+        <!-- step 2 ends here-->
+
+
+        <!-- step 3 starts here-->
+        <!----------------------->
+        <!----------------------->
+        <!----------------------->
+        <div class="col-12 col-lg-8" id="step3">
+          <span class="text-muted d-block mb-3 text-center">step 3 : cost of your reservation</span>           
+            <div class="row pt-5">
+              <div class="col-12 text-center">
+                <img class="mb-3" width="150px" src="https://i.imgur.com/jaNBRVn.png">
+                <h1>Cost is : <span class="p-2 text-danger" id="costContent"></span></h1>
+              </div>
+            </div>
+        </div>
+        <!--------------------->
+        <!--------------------->
+        <!--------------------->
+        <!-- step 3 ends here-->
+
+
+
+
+      </div>
+    </div>
+
+
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script type="text/javascript" src="navigation.js"></script>
+    <script type="text/javascript" src="logic.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="api.js"></script>
+
+    <script type="text/javascript">
+      checkTheUserCurrentStep();
+      listRoomTypes();
+      listMealsTypes();
+    </script>
+  </body>
+</html>
