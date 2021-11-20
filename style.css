@@ -46,3 +46,10 @@ span.text-muted {
 	padding-top: 5px;
 	font-size: 16px;
 }
+
+input.form-control, button.form-control, select.form-control {
+	border: 0;
+	border-radius: 16px;
+	padding: 12px 16px;
+	height: auto;
+}
