@@ -29,5 +29,16 @@ function checkAvailability() {
 
   
   function checkIfReservationStored() {
-    return window.localStorage.getItem("token") != null ? true : false;
+    var token = window.localStorage.getItem("token");
+
+    axios.get('http://localhost:6600/api/reservations/'+token)
+    .then(function (response) {
+      if(response.status == 200) {
+        return true;
+      }
+    })
+    .catch(function (error) {
+      return false;
+    });
+
   }  

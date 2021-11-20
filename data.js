@@ -96,6 +96,7 @@ function listMealsTypes() {
       "checkOut":new Date(checkOut).toLocaleDateString()
     })
     .then(function (response) {
+      console.log("updating");
       if(response.status == 200) {
         
         //then update
@@ -150,7 +151,11 @@ function storePermenantReservation() {
     "checkOut":new Date(checkOut).toLocaleDateString()
   })
   .then(function (response) {
+    console.log("storing");
     if(response.status == 200) {
+
+      //countdownTimer.init();
+
       axios.post('http://localhost:6600/api/reservations/permenant/store', 
         {
           "adultsNumber":adultsNumber,
