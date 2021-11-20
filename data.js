@@ -43,29 +43,6 @@ function listRoomTypes() {
     window.localStorage.setItem("formData", JSON.stringify(formData));
   }
 
-  function storePermenantReservation() {
-    var token = Math.random().toString(36).substr(2);
-    window.localStorage.setItem("token", token);
-  
-    var formData = JSON.parse(window.localStorage.getItem("formData"));
-    axios.post('http://localhost:6600/api/reservations/permenant/store', 
-      {
-        "adultsNumber":formData.adultsNumber,
-        "kidsNumber":formData.kidsNumber,
-        "checkIn":formData.checkIn,
-        "checkOut":formData.checkOut,
-        "roomId":formData.roomType,
-        "token":token
-      }
-    )
-    .then(function (response) {
-      console.log(response)
-    })
-    .catch(function (error) {
-      console.log(error)
-    });
-  }
-
   
 function listMealsTypes() {
     axios.get('http://localhost:6600/api/meals')
@@ -78,7 +55,6 @@ function listMealsTypes() {
       }
     })
     .catch(function (error) {
-      console.log(error)
     });
   }
 
@@ -120,10 +96,8 @@ function listMealsTypes() {
       "checkOut":new Date(checkOut).toLocaleDateString()
     })
     .then(function (response) {
-      console.log(response.status)
       if(response.status == 200) {
         
-        /********************************************** */
         //then update
         axios.post('http://localhost:6600/api/reservations/permenant/update', 
         {
@@ -136,17 +110,14 @@ function listMealsTypes() {
         }
         )
         .then(function (response) {
-          console.log(response)
         })
         .catch(function (error) {
           alert("An error happens")
         });
-        /********************************* */
-        document.getElementById("next").disabled = false;
+        showStep2();
       }
     })
     .catch(function (error) {
-      console.log(error)
       if(error.status == 400) {
         alert("please fill all fields");
       } else {
@@ -155,9 +126,59 @@ function listMealsTypes() {
       showStep1();
     });
     /********************************************** */
-  
+}
 
 
+function storePermenantReservation() {
+  var token = Math.random().toString(36).substr(2);
+  window.localStorage.setItem("token", token);
+
+  let adultsNumber=document.getElementById("adultsNumber").value;
+  let kidsNumber=document.getElementById("kidsNumber").value;
+  let checkIn=document.getElementById("checkIn").value;
+  let checkOut=document.getElementById("checkOut").value;
+  let roomType=document.getElementById("roomsList").value;
+  StoreFormParametersInLocalStorage(adultsNumber, kidsNumber, checkIn, checkOut, roomType);
+  let formData = JSON.parse(window.localStorage.getItem("formData"));
+
+  /********************************************** */
+  axios.post('http://localhost:6600/api/reservations/check', {
+    "id":roomType,
+    "adultsNumber":adultsNumber,
+    "kidsNumber":kidsNumber,
+    "checkIn":new Date(checkIn).toLocaleDateString(),
+    "checkOut":new Date(checkOut).toLocaleDateString()
+  })
+  .then(function (response) {
+    if(response.status == 200) {
+      axios.post('http://localhost:6600/api/reservations/permenant/store', 
+        {
+          "adultsNumber":adultsNumber,
+          "kidsNumber":kidsNumber,
+          "checkIn":new Date(checkIn).toLocaleDateString(),
+          "checkOut":new Date(checkOut).toLocaleDateString(),
+          "roomId":roomType,
+          "token":token
+        }
+      )
+      .then(function (response) {
+        if(response.status==200) {
+          showStep2();
+        }
+      })
+      .catch(function (error) {
+      });
+    }
+  })
+  .catch(function (error) {
+    if(error.status == 400) {
+      alert("please fill all fields");
+    } else {
+      alert("Sorry, there're no available rooms but you may decrease the needed rooms and try again")
+    }
+    showStep1();
+  });
+/********************************************** */
 }
 
 

@@ -6,8 +6,8 @@ function goToStep1() {
   
   function goToStep2() {
       window.localStorage.setItem("currentStep", 2);
-      showStep2();
-      checkIfHasToken() ? updatePermenantReservation() : storePermenantReservation();
+      //showStep2(); //moved to update and store function
+      checkIfReservationStored() ? updatePermenantReservation() : storePermenantReservation();
     
   }
   

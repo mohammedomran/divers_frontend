@@ -14,7 +14,6 @@ function checkAvailability() {
       "checkOut":new Date(checkOut).toLocaleDateString()
     })
     .then(function (response) {
-      console.log(response.status)
       if(response.status == 200) {
         
         document.getElementById("next").disabled = false;
@@ -29,6 +28,6 @@ function checkAvailability() {
   }
 
   
-  function checkIfHasToken() {
+  function checkIfReservationStored() {
     return window.localStorage.getItem("token") != null ? true : false;
   }  
